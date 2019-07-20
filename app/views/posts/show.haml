@@ -12,7 +12,7 @@
         .jumbotron
         .col-md-6
           %h1{class: 'bold', id: 'title'}= @post.title
-          %p{id: 'description'}=@post.description
+          %p{id: 'description'}= @post.description
         .col-md-6
           .media
             .media-left
@@ -23,7 +23,7 @@
 
     .col-md-12
       #content
-        %hp{id: 'body'}=@post.content
+        %hp{id: 'body'}= @post.content
 
     .col-md-12
       #footer

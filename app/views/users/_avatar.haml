@@ -1,4 +1,6 @@
 = form_for(user) do |f|
+  = render 'shared/errors', model: user
+
   .field
     = f.label :avatar, 'Avatar'
     = f.file_field :avatar

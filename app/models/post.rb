@@ -17,6 +17,7 @@ class Post < ApplicationRecord
   scope :recents,     -> { order(created_at: :desc) }
   scope :lasts,       -> { order(created_at: :asc) }
   scope :related,     -> (post) { where(category: post.category) }
+  scope :by_year,     -> (year) { where('created_at like ?', "%#{year}%") }
 
   belongs_to :category
   belongs_to :user

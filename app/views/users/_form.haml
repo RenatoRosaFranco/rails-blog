@@ -1,4 +1,6 @@
 = form_for(user) do |f|
+  = render 'shared/errors', model: user
+
   .field
     = f.label :name, 'Nome'
     = f.text_field :name, class: 'form-control', required: 'required',

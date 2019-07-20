@@ -15,7 +15,8 @@
     placeholder: 'Digite as tags', autocomplete: 'off'
   .field
     = f.label :category_id, 'Categoria'
-    = f.collection_select :category_id, Category.order(created_at: :desc), :id, :name,
+    = f.collection_select :category_id,
+    Category.order(created_at: :desc), :id, :name,
     {prompt: 'Selecionar Categoria'}, {class: 'form-control'}
   .actions
     %br

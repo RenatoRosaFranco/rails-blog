@@ -7,14 +7,20 @@
 .container
   .row
     .col-md-12
+      .col-md-12
+        .col-md-12
+          %ul{class: 'breadcrumb'}
+            %li=link_to 'Home', root_path
+            %li=link_to 'Blog', posts_path
+
       .col-md-8
         .col-md-12
           .well{class: 'text-right'}
             %ul{class: 'list-inline'}
               %li= button_to 'Adicionar Categoria', new_category_path,
-                class: 'btn btn-default top', method: :get
+                class: 'btn btn-default btn-lg top', method: :get
               %li= button_to 'Adicionar Postagem', new_post_path,
-                class: 'btn btn-primary top', method: :get
+                class: 'btn btn-primary btn-lg top', method: :get
 
         - @posts.published.recents.limit(12).each do |post|
           .col-md-6
@@ -40,8 +46,11 @@
             %h4 Buscar
             = search_form_for @search do |f|
               .field
-                = f.text_field :title_cont, class: 'form-control',
+                .input-group
+                  = f.text_field :title_cont, class: 'form-control',
                   placeholder: 'Buscar...', autocomplete: 'off'
+                  .input-group-addon
+                    %i{class: 'glyphicon glyphicon-search'}
 
         .col-md-12
           .panel{class: 'panel-default', style: 'padding: 20px;'}
@@ -78,9 +87,9 @@
         .col-md-12
           .panel{class: 'panel-default', style: 'padding: 20px;'}
             %h4{class: 'bold'} Ano
-            - Post.build_year_cloud.each do |year|
-              = link_to posts_path(:q, {created_at_cont: year}), method: :get do
-                = year
+            %ul{class: 'list-unstyled'}
+              - Post.build_year_cloud.each do |year|
+                %li= link_to "#{year} - #{Post.by_year(year).count}", posts_path(:q, {created_at_cont: year})
 
         .col-md-12
           .panel{class: 'panel-default', style: 'padding: 20px;'}
