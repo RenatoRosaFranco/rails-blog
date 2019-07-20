@@ -88,7 +88,7 @@
           .panel{class: 'panel-default', style: 'padding: 20px;'}
             %h4{class: 'bold'} Ano
             %ul{class: 'list-unstyled'}
-              - Post.build_year_cloud.each do |year|
+              - Post.build_year_cloud.sort.reverse.each do |year|
                 %li= link_to "#{year} - #{Post.by_year(year).count}", posts_path(:q, {created_at_cont: year})
 
         .col-md-12

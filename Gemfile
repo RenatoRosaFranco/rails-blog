@@ -36,6 +36,7 @@ gem 'pundit'
 gem 'draper'
 gem 'friendly_id'
 gem 'ransack'
+gem 'alertifyjs-rails'
 gem 'responders'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

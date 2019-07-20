@@ -45,7 +45,7 @@ class Newsletter < ApplicationRecord
   end
 
   def set_status(status = true)
-    self.status = status
+    self.active = status
   end
 
   def set_signup_date(date = Date.today)
