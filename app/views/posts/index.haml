@@ -1,0 +1,110 @@
+= provide :title, 'Blog'
+
+#presenter{class: 'jumbotron'}
+  .row
+    .col-md-12
+
+.container
+  .row
+    .col-md-12
+      .col-md-8
+        .col-md-12
+          .well{class: 'text-right'}
+            %ul{class: 'list-inline'}
+              %li= button_to 'Adicionar Categoria', new_category_path,
+                class: 'btn btn-default top', method: :get
+              %li= button_to 'Adicionar Postagem', new_post_path,
+                class: 'btn btn-primary top', method: :get
+
+        - @posts.published.recents.limit(12).each do |post|
+          .col-md-6
+            .panel{class: 'panel-default', id: 'post'}
+              .jumbotron
+              %div{style: 'padding: 10px;'}
+                %h4{id: 'title'}=link_to post.title, post_path(post)
+                %p{id: 'description'}=post.description
+                =link_to 'Ver mais', post_path(post), class: 'btn btn-primary btn-lg top'
+
+        .col-md-12
+          -if @posts.empty?
+            .well{class: 'text-center'}
+              %p Nenhuma postagem encontrada.
+
+        .col-md-12
+          %div{class: 'text-center'}
+            = paginate(@posts)
+
+      .col-md-4
+        .col-md-12
+          .panel{class: 'panel-default', style: 'padding: 20px;'}
+            %h4 Buscar
+            = search_form_for @search do |f|
+              .field
+                = f.text_field :title_cont, class: 'form-control',
+                  placeholder: 'Buscar...', autocomplete: 'off'
+
+        .col-md-12
+          .panel{class: 'panel-default', style: 'padding: 20px;'}
+            %h4 Sobre
+            .jumbotron
+            %h3{class: 'bold'} Renato Franco
+            %h5 Desenvolvedor Full-Stack
+            %p Apaixonado por desenvolvimento e tecnologias Open Source passo o meu tempo escrevendo sobre tecnologia, empreendedorismo e viagens.
+
+        .col-md-12
+          .panel{class: 'panel-default', style: 'padding: 20px;'}
+            %h4{class: 'bold'} Ultimas postagens
+            - @posts.published.recents.limit(5).each do |post|
+              .media
+                .media-left
+                .media-body
+                  %h4{class: 'media-heading'}= link_to post.title, post_path(post)
+                  %p=post.description
+
+        .col-md-12
+          .panel{class: 'panel-default', style: 'padding: 20px;'}
+            %h4{class: 'bold'} Categorias
+            %ul{class: 'list-unstyled'}
+              - Category.all.each do |category|
+                %li=link_to "#{category.name} - #{category.posts.count}", posts_path(q: {category_cont: category.id})
+
+        .col-md-12
+          .panel{class: 'panel-default', style: 'padding: 20px;'}
+            %h4{class: 'bold'} Tags
+            - Post.build_tag_cloud.each do |tag|
+              = link_to posts_path(:q, {tags_cont: tag}), method: :get do
+                %span{class: 'badge'}=tag
+
+        .col-md-12
+          .panel{class: 'panel-default', style: 'padding: 20px;'}
+            %h4{class: 'bold'} Ano
+            - Post.build_year_cloud.each do |year|
+              = link_to posts_path(:q, {created_at_cont: year}), method: :get do
+                = year
+
+        .col-md-12
+          .panel{class: 'panel-default', style: 'padding: 20px;'}
+            %h4{class: 'bold'} Newsletters
+            = form_for @newsletter, {url: newsletters_path, method: :post} do |f|
+              .field
+                = f.label :name, 'Nome Completo'
+                .input-group
+                  = f.text_field :name, class: 'form-control', required: 'required',
+                  placeholder: 'Digite o nome', autocomplete: 'off'
+                  .input-group-addon
+                    %i{class: 'glyphicon glyphicon-search'}
+              .field
+                = f.label :email, 'E-mail'
+                .input-group
+                  = f.email_field :email, class: 'form-control', required: 'required',
+                  placeholder: 'Digite o e-mail', autocomplete: 'off'
+                  .input-group-addon
+                    %i{class: 'glyphicon glyphicon-search'}
+              .field
+                %br
+                = f.submit 'Inscreva-me', class: 'btn btn-primary btn-lg top'
+
+        .col-md-12
+          .well
+            %h4{class: 'bold'} Renato Franco
+            %p Todos os direitos reservados &copy #{Date.today.year}

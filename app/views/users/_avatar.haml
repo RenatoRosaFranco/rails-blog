@@ -1,0 +1,6 @@
+= form_for(user) do |f|
+  .field
+    = f.label :avatar, 'Avatar'
+    = f.file_field :avatar
+  .field
+    = f.submit nil, class: 'btn btn-primary btn-lg top'

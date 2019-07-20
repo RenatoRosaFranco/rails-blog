@@ -1,0 +1,22 @@
+= form_for(category) do |f|
+  = render 'shared/errors', model: category
+
+  .field
+    = f.label :name, 'Nome'
+    = f.text_field :name, class: 'form-control', required: 'required',
+    placeholder: 'Digite o nome', autocomplete: 'off'
+  .field
+    = f.label :description, 'Descrição'
+    = f.text_area :description, class: 'form-control', required: 'required',
+    placeholder: 'Digite a descrição', autocomplete: 'off'
+  .field
+    = f.label :tags, 'Tags'
+    = f.text_field :tags, class: 'form-control', required: 'required',
+    placeholder: 'Digite as tags', autocomplete: 'off'
+  .field
+    = f.label :category_id, 'Categoria'
+    = f.collection_select :category_id, Category.order(created_at: :desc), :id, :name,
+    {prompt: 'Selecionar Categoria'}, {class: 'form-control'}
+  .actions
+    %br
+    = f.submit nil, class: 'btn btn-primary btn-lg top'

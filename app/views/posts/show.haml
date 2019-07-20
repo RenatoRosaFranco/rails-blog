@@ -1,0 +1,45 @@
+= provide :title, @post.title
+
+.container
+  .row
+    .col-md-12
+      %ul{class: 'breadcrumb'}
+        %li=link_to 'Home', root_path
+        %li=link_to @post.title, post_path(@post)
+
+    .col-md-12
+      #heading
+        .jumbotron
+        .col-md-6
+          %h1{class: 'bold', id: 'title'}= @post.title
+          %p{id: 'description'}=@post.description
+        .col-md-6
+          .media
+            .media-left
+              %p=@post.thubmnail
+            .media-body
+              %h4{class: 'bold'}= @post.user.email
+              %p="Postado há #{time_ago_in_words(@post.created_at)}"
+
+    .col-md-12
+      #content
+        %hp{id: 'body'}=@post.content
+
+    .col-md-12
+      #footer
+        = @post.tags
+
+    .col-md-12
+      #comments
+        = render partial: 'shared/disqus'
+
+    .col-md-12
+      #related
+        - Post.related(@post).limit(3).each do |post|
+          .col-md-4
+            .panel{class: 'panel-default'}
+              .jumbotron
+              #content{style: 'padding: 20px;'}
+                %h4{class: 'bold'}= link_to post.title, post_path(post)
+                %p=post.description
+                =link_to 'Ver Mais', post_path(post), class: 'btn btn-primary btn-lg top'

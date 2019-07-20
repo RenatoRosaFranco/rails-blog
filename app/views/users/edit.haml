@@ -1,0 +1,7 @@
+= provide :title, "Editar #{@user.name}"
+
+.container
+  .row
+    .col-md-12
+      = render 'avatar', user: @user
+      = render 'form',   user: @user

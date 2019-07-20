@@ -1,0 +1,20 @@
+= form_for(user) do |f|
+  .field
+    = f.label :name, 'Nome'
+    = f.text_field :name, class: 'form-control', required: 'required',
+    placeholder: 'Digit o nome', autocomplete: 'off'
+  .field
+    = f.label :email, 'E-mail'
+    = f.email_field :email, class: 'form-control', required: 'required',
+    placeholder: 'Digite o e-mail', autocomplete: 'off'
+  .field
+    = f.label :password, 'Senha'
+    = f.password_field :password, class: 'form-control', required: 'required',
+    placeholder: 'Digite a senha', autocomplete: 'off'
+  .field
+    = f.label :password_confirmation, 'Confirmar senha'
+    = f.password_field :password_confirmation, class: 'form-control', required: 'required',
+    placeholder: 'Confirme sua Senha', autocomplete: 'off'
+  .actions
+    %br
+    = f.submit nil, class: 'btn btn-primary btn-lg top'

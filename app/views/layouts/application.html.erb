@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Renato Franco - <%= yield :title %></title>
+    <meta charset="UTF-8">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style type="text/css"><%= yield :css %></style>
+    <script type="text/javascript"><%= yield :js %></script>
+    <link href='https://cdn.jsdelivr.net/npm/froala-editor@3.0.3/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.0.3/js/froala_editor.pkgd.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/froala-editor@3.0.0-beta.0/css/froala_editor.css">
+  </head>
+  <body class="<%= controller.controller_name %>">
+    <%= render partial: 'layouts/header' %>
+    <div id="content" style="margin-top: 70px;">
+      <%= yield %>
+    </div>
+    <%= render partial: 'layouts/footer' %>
+  </body>
+</html>
